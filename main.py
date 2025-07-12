@@ -319,6 +319,7 @@ browse_canvas = tk.Canvas(dashboard_frame, width=700, height=500)
 browse_scrollbar = tk.Scrollbar(dashboard_frame, orient="vertical", command=browse_canvas.yview)
 browse_frame = tk.Frame(browse_canvas)
 
+# made by Team Diamonds
 browse_frame.bind(
     "<Configure>",
     lambda e: browse_canvas.configure(
