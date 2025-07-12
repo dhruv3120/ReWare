@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ReWear - Sustainable Fashion Exchange</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="static/style.css" />
+</head>
+<body>
+
+<div class="app-container">
+
+  <!-- LOGIN FORM -->
+  <div id="login-form" class="form-container">
+    <h1>Welcome to ReWear</h1>
+    <div class="input-group">
+      <input type="email" id="login-email" class="input-field" placeholder="Email address" />
+    </div>
+    <div class="input-group">
+      <input type="password" id="login-password" class="input-field" placeholder="Password" />
+    </div>
+    <button id="login-btn" class="btn-primary">Sign In</button>
+    <p class="link-text">Don't have an account? <a href="#" id="show-register">Create one here</a></p>
+  </div>
+
+  <!-- REGISTER FORM -->
+  <div id="register-form" class="form-container" style="display:none;">
+    <h1>Join ReWear</h1>
+    <div class="input-group">
+      <input type="text" id="reg-name" class="input-field" placeholder="Full Name" />
+    </div>
+    <div class="input-group">
+      <input type="email" id="reg-email" class="input-field" placeholder="Email address" />
+    </div>
+    <div class="input-group">
+      <input type="password" id="reg-password" class="input-field" placeholder="Password" />
+    </div>
+    <div class="input-group">
+      <input type="password" id="reg-confirm"  class="input-field" placeholder="Confirm Password" />
+    </div>
+    <button id="register-btn" class="btn-primary" onclick="sendDatareg()">Create Account</button>
+    <p class="link-text">Already have an account? <a href="#" id="show-login">Sign in here</a></p>
+  </div>
+
+  <!-- DASHBOARD -->
+  <div id="dashboard" class="dashboard" style="display:none;">
+
+    <nav class="navbar">
+      <button id="btn-browse" class="nav-btn">Browse Categories</button>
+      <button id="btn-profile" class="nav-btn">Profile</button>
+      <button id="btn-upload" class="nav-btn">Upload Item</button>
+      <button id="btn-logout" class="nav-btn logout">Logout</button>
+    </nav>
+
+    <div class="points-display" id="points-display">Points: 0</div>
+
+    <div class="browse-frame" id="browse-content">
+      <!-- Categories or Items will be loaded here -->
+    </div>
+  </div>
+
+</div>
+
+<script src="static/script.js" defer></script>
+
+</body>
+</html>
