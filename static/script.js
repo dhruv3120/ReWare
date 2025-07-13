@@ -23,17 +23,28 @@ document.getElementById("btn-logout").addEventListener("click", async () => {
     loginForm.style.display = "flex";
     document.getElementById("login-email").value = "";
     document.getElementById("login-password").value = "";
+    // Hide all content sections when logging out
+    document.querySelectorAll('.browse-frame, .team-container').forEach(section => {
+      section.style.display = 'none';
+    });
   } catch (error) {
     console.error('Logout error:', error);
   }
 });
 
 document.getElementById("btn-browse").addEventListener("click", () => {
+  // Hide team content and show browse content
+  document.getElementById('team-content').style.display = 'none';
+  document.getElementById('browse-content').style.display = 'block';
   loadCategories();
 });
 
 document.getElementById("btn-profile").addEventListener("click", async () => {
   try {
+    // Hide team content and show browse content for profile
+    document.getElementById('team-content').style.display = 'none';
+    document.getElementById('browse-content').style.display = 'block';
+    
     const response = await fetch('/api/user');
     const userData = await response.json();
     
@@ -87,6 +98,10 @@ document.getElementById("btn-profile").addEventListener("click", async () => {
 });
 
 document.getElementById("btn-upload").addEventListener("click", () => {
+  // Hide team content and show browse content for upload
+  document.getElementById('team-content').style.display = 'none';
+  document.getElementById('browse-content').style.display = 'block';
+  
   const browseContent = document.getElementById("browse-content");
   browseContent.innerHTML = `
     <h2>Upload New Item</h2>
@@ -153,6 +168,19 @@ document.getElementById("btn-upload").addEventListener("click", () => {
       alert('Failed to upload item. Please try again.');
     }
   });
+});
+
+// NEW: Team page functionality
+document.getElementById("btn-team").addEventListener("click", () => {
+  // Hide browse content and show team content
+  document.getElementById('browse-content').style.display = 'none';
+  document.getElementById('team-content').style.display = 'block';
+  
+  // Update active button state
+  document.querySelectorAll('.nav-btn').forEach(btn => {
+    btn.classList.remove('active');
+  });
+  document.getElementById('btn-team').classList.add('active');
 });
 
 async function loadCategories() {
@@ -358,4 +386,38 @@ function sendDatareg() {
     console.error("Fetch error:", error);
     alert("Something went wrong. Try again!");
   });
+}
+// Enhanced team page functionality
+document.getElementById("btn-team").addEventListener("click", () => {
+  // Hide browse content and show team content
+  document.getElementById('browse-content').style.display = 'none';
+  document.getElementById('team-content').style.display = 'block';
+  
+  // Create particles effect
+  createTeamParticles();
+  
+  // Update active button state
+  document.querySelectorAll('.nav-btn').forEach(btn => {
+    btn.classList.remove('active');
+  });
+  document.getElementById('btn-team').classList.add('active');
+});
+
+// Create floating particles for team page
+function createTeamParticles() {
+  const particles = document.querySelector('.particles');
+  if (!particles) return;
+  
+  // Clear existing particles
+  particles.innerHTML = '';
+  
+  for (let i = 0; i < 50; i++) {
+    const particle = document.createElement('div');
+    particle.className = 'particle';
+    particle.style.left = Math.random() * 100 + '%';
+    particle.style.top = Math.random() * 100 + '%';
+    particle.style.animationDelay = Math.random() * 6 + 's';
+    particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+    particles.appendChild(particle);
+  }
 }
