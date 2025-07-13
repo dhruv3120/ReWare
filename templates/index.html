@@ -6,6 +6,614 @@
   <title>ReWear - Sustainable Fashion Exchange</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="static/style.css" />
+  <style>
+    .footer {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 12px 20px;
+      border-radius: 25px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      z-index: 1000;
+      transition: all 0.3s ease;
+      opacity: 0.9;
+    }
+    
+    .footer:hover {
+      opacity: 1;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    }
+    
+    .footer .sparkle {
+      display: inline-block;
+      margin-right: 8px;
+      animation: sparkle 2s infinite;
+    }
+    
+    @keyframes sparkle {
+      0%, 100% { transform: scale(1) rotate(0deg); }
+      50% { transform: scale(1.2) rotate(180deg); }
+    }
+    
+    .footer .team-name {
+      font-weight: 600;
+      background: linear-gradient(45deg, #ffd700, #ffed4e);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    /* Team Page Styles */
+    .team-container {
+      padding: 40px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      min-height: 100vh;
+    }
+    
+    .team-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    
+    .team-title {
+      font-size: 3.5rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 20px;
+      position: relative;
+    }
+    
+    .team-title::after {
+      content: '✨';
+      position: absolute;
+      right: -50px;
+      top: -10px;
+      font-size: 2rem;
+      animation: float 3s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+    
+    .team-subtitle {
+      font-size: 1.3rem;
+      color: #666;
+      font-weight: 400;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+    
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 40px;
+      margin-top: 60px;
+    }
+    
+    .team-member {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 25px;
+      padding: 40px 30px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s ease;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .team-member::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #667eea, #764ba2, #f093fb, #f5576c);
+      background-size: 300% 100%;
+      animation: gradientShift 3s ease infinite;
+    }
+    
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    .team-member:hover {
+      transform: translateY(-15px) scale(1.02);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    }
+    
+    .member-photo {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      margin: 0 auto 25px;
+      position: relative;
+      overflow: hidden;
+      border: 4px solid transparent;
+      background: linear-gradient(45deg, #667eea, #764ba2) padding-box, 
+                  linear-gradient(45deg, #667eea, #764ba2) border-box;
+      transition: all 0.3s ease;
+    }
+    
+    .member-photo:hover {
+      transform: scale(1.1) rotate(5deg);
+    }
+    
+    .member-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: all 0.3s ease;
+    }
+    
+    .member-name {
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #333;
+      position: relative;
+    }
+    
+    .member-role {
+      font-size: 1.1rem;
+      color: #667eea;
+      font-weight: 500;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .member-bio {
+      font-size: 1rem;
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 25px;
+    }
+    
+    .member-skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      margin-bottom: 25px;
+    }
+    
+    .skill-tag {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+    
+    .skill-tag:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    }
+    
+    .member-socials {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+    
+    .social-link {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-decoration: none;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+    }
+    
+    .social-link:hover {
+      transform: translateY(-3px) scale(1.1);
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+    }
+    
+    .fun-fact {
+      background: linear-gradient(135deg, #ffeaa7, #fab1a0);
+      padding: 15px;
+      border-radius: 15px;
+      margin-top: 20px;
+      font-style: italic;
+      color: #333;
+      position: relative;
+    }
+    
+    .fun-fact::before {
+      content: '💡';
+      position: absolute;
+      top: -5px;
+      left: 15px;
+      font-size: 1.2rem;
+    }
+    
+    @media (max-width: 768px) {
+      .footer {
+        bottom: 10px;
+        right: 10px;
+        font-size: 12px;
+        padding: 10px 16px;
+      }
+      
+      .team-title {
+        font-size: 2.5rem;
+      }
+      
+      .team-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+      
+      .team-member {
+        padding: 30px 20px;
+      }
+    }
+    
+    /* Team Page Styles - FIXED VERSION */
+    .team-container {
+      padding: 60px 20px 60px;
+      max-width: 1400px;
+      margin: 0 auto;
+      position: relative;
+      min-height: 100vh;
+      background: #0f0f23; /* Changed to match page background */
+      border-radius: 20px;
+      overflow-y: auto;
+      max-height: none; /* Removed height restriction for proper scrolling */
+    }
+
+    /* Animated background particles */
+    .particles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.6);
+      border-radius: 50%;
+      animation: float 6s infinite ease-in-out;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 1; }
+      50% { transform: translateY(-100px) rotate(180deg); opacity: 0.5; }
+    }
+
+    .team-header {
+      text-align: center;
+      margin-bottom: 80px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .team-title {
+      font-size: 4rem;
+      font-weight: 700;
+      color: #ffffff; /* Changed to white for better contrast */
+      margin-bottom: 20px;
+      position: relative;
+      /* FIXED: Reduced glow intensity and made it more subtle */
+      text-shadow: 0 2px 10px rgba(255, 255, 255, 0.3);
+      animation: subtleGlow 3s ease-in-out infinite alternate;
+    }
+
+    /* FIXED: More subtle glow animation */
+    @keyframes subtleGlow {
+      from { 
+        text-shadow: 0 2px 10px rgba(255, 255, 255, 0.3), 
+                     0 0 20px rgba(255, 255, 255, 0.2); 
+      }
+      to { 
+        text-shadow: 0 2px 10px rgba(255, 255, 255, 0.4), 
+                     0 0 30px rgba(255, 255, 255, 0.3); 
+      }
+    }
+
+    .team-title::after {
+      content: '💎';
+      position: absolute;
+      right: -60px;
+      top: -10px;
+      font-size: 3rem;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-30px); }
+      60% { transform: translateY(-15px); }
+    }
+
+    .team-subtitle {
+      font-size: 1.4rem;
+      color: rgba(255, 255, 255, 0.9);
+      font-weight: 300;
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.6;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 50px;
+      margin-top: 80px;
+      position: relative;
+      z-index: 2;
+      /* FIXED: Added padding bottom to ensure last card is visible */
+      padding-bottom: 60px;
+    }
+
+    .team-member {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 30px;
+      padding: 50px 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(20px);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      opacity: 0;
+      transform: translateY(50px);
+      animation: slideUp 0.8s ease forwards;
+    }
+
+    .team-member::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 8px;
+      background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #ffeaa7, #dda0dd);
+      background-size: 300% 100%;
+      animation: rainbow 4s ease infinite;
+    }
+
+    @keyframes rainbow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .team-member:hover {
+      transform: translateY(-20px) scale(1.05);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.25);
+      border-color: rgba(255, 255, 255, 0.5);
+    }
+
+    .team-member:nth-child(1) { animation-delay: 0s; }
+    .team-member:nth-child(2) { animation-delay: 0.2s; }
+    .team-member:nth-child(3) { animation-delay: 0.4s; }
+
+    .member-photo {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      margin: 0 auto 30px;
+      position: relative;
+      overflow: hidden;
+      border: 5px solid transparent;
+      background: linear-gradient(45deg, #ff6b6b, #4ecdc4) padding-box, 
+                  linear-gradient(45deg, #ff6b6b, #4ecdc4) border-box;
+      transition: all 0.4s ease;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .member-photo:hover {
+      transform: scale(1.15) rotate(10deg);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .member-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: all 0.4s ease;
+    }
+
+    .member-photo:hover img {
+      transform: scale(1.1);
+    }
+
+    .member-name {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: #333;
+      position: relative;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .member-role {
+      font-size: 1.2rem;
+      color: #667eea;
+      font-weight: 600;
+      margin-bottom: 25px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      position: relative;
+    }
+
+    .member-role::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, #667eea, #764ba2);
+      border-radius: 3px;
+    }
+
+    .member-bio {
+      font-size: 1.1rem;
+      color: #555;
+      line-height: 1.7;
+      margin-bottom: 30px;
+      font-weight: 400;
+    }
+
+    .member-skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      margin-bottom: 30px;
+    }
+
+    .skill-tag {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      padding: 10px 16px;
+      border-radius: 25px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    }
+
+    .skill-tag:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
+    }
+
+    .member-socials {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 25px;
+    }
+
+    .social-link {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-decoration: none;
+      font-size: 1.4rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+    }
+
+    .social-link:hover {
+      transform: translateY(-5px) scale(1.1);
+      box-shadow: 0 12px 30px rgba(102, 126, 234, 0.5);
+    }
+
+    .fun-fact {
+      background: linear-gradient(135deg, #ffeaa7, #fab1a0);
+      padding: 20px;
+      border-radius: 20px;
+      margin-top: 25px;
+      font-style: italic;
+      color: #333;
+      position: relative;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      font-weight: 500;
+    }
+
+    .fun-fact::before {
+      content: '💡';
+      position: absolute;
+      top: -10px;
+      left: 20px;
+      font-size: 1.5rem;
+      background: white;
+      padding: 5px;
+      border-radius: 50%;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    @keyframes slideUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Mobile responsive */
+    @media (max-width: 768px) {
+      .team-container {
+        padding: 40px 15px 40px;
+      }
+
+      .team-title {
+        font-size: 2.5rem;
+      }
+
+      .team-title::after {
+        font-size: 2rem;
+        right: -40px;
+      }
+
+      .team-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        margin-top: 60px;
+        padding-bottom: 40px;
+      }
+
+      .team-member {
+        padding: 40px 30px;
+      }
+
+      .member-photo {
+        width: 120px;
+        height: 120px;
+      }
+
+      .member-name {
+        font-size: 1.6rem;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -50,6 +658,7 @@
       <button id="btn-browse" class="nav-btn">Browse Categories</button>
       <button id="btn-profile" class="nav-btn">Profile</button>
       <button id="btn-upload" class="nav-btn">Upload Item</button>
+      <button id="btn-team" class="nav-btn">Our Team</button>
       <button id="btn-logout" class="nav-btn logout">Logout</button>
     </nav>
 
@@ -58,8 +667,102 @@
     <div class="browse-frame" id="browse-content">
       <!-- Categories or Items will be loaded here -->
     </div>
+
+    <!-- TEAM PAGE -->
+    <div id="team-content" class="team-container" style="display:none;">
+  <div class="particles"></div>
+  
+  <div class="team-header">
+    <h1 class="team-title">Team Diamond</h1>
+    <p class="team-subtitle">The brilliant minds behind ReWear's sustainable fashion revolution 🌱✨</p>
   </div>
 
+    <div class="team-grid">
+      <!-- Team Member 1 -->
+      <div class="team-member">
+        <div class="member-photo">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face" alt="Alex Chen">
+        </div>
+        <h3 class="member-name">Alex Chen</h3>
+        <p class="member-role">Lead Developer & Co-Founder</p>
+        <p class="member-bio">Full-stack wizard who turns coffee into code and believes sustainable fashion can change the world, one line at a time! When not coding, you'll find Alex thrifting for vintage band tees.</p>
+        <div class="member-skills">
+          <span class="skill-tag">React</span>
+          <span class="skill-tag">Node.js</span>
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">UI/UX</span>
+          <span class="skill-tag">MongoDB</span>
+        </div>
+        <div class="member-socials">
+          <a href="#" class="social-link">💼</a>
+          <a href="#" class="social-link">🐦</a>
+          <a href="#" class="social-link">📸</a>
+        </div>
+        <div class="fun-fact">
+          Fun fact: Has never worn the same outfit twice in 2 years! 👗
+        </div>
+      </div>
+
+      <!-- Team Member 2 -->
+      <div class="team-member">
+        <div class="member-photo">
+          <img src="https://images.unsplash.com/photo-1494790108755-2616b60d5068?w=300&h=300&fit=crop&crop=face" alt="Sarah Rodriguez">
+        </div>
+        <h3 class="member-name">Sarah Rodriguez</h3>
+        <p class="member-role">Sustainability Expert & Co-Founder</p>
+        <p class="member-bio">Fashion industry veteran turned eco-warrior! Sarah's passion for sustainable practices drives ReWear's mission forward. She's got the inside scoop on making fashion circular and fabulous.</p>
+        <div class="member-skills">
+          <span class="skill-tag">Sustainability</span>
+          <span class="skill-tag">Fashion</span>
+          <span class="skill-tag">Strategy</span>
+          <span class="skill-tag">Analytics</span>
+          <span class="skill-tag">Branding</span>
+        </div>
+        <div class="member-socials">
+          <a href="#" class="social-link">💼</a>
+          <a href="#" class="social-link">🐦</a>
+          <a href="#" class="social-link">📸</a>
+        </div>
+        <div class="fun-fact">
+          Fun fact: Can spot vintage designer pieces from 50 feet away! 👀
+        </div>
+      </div>
+
+      <!-- Team Member 3 -->
+      <div class="team-member">
+        <div class="member-photo">
+          <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face" alt="Jamie Park">
+        </div>
+        <h3 class="member-name">Jamie Park</h3>
+        <p class="member-role">Creative Director & UX Designer</p>
+        <p class="member-bio">Design genius who makes sustainability look absolutely stunning! Jamie ensures ReWear is as beautiful as it is meaningful. Master of making complex user flows feel like magic.</p>
+        <div class="member-skills">
+          <span class="skill-tag">Design</span>
+          <span class="skill-tag">Branding</span>
+          <span class="skill-tag">Figma</span>
+          <span class="skill-tag">Motion</span>
+          <span class="skill-tag">Prototyping</span>
+        </div>
+        <div class="member-socials">
+          <a href="#" class="social-link">💼</a>
+          <a href="#" class="social-link">🐦</a>
+          <a href="#" class="social-link">📸</a>
+        </div>
+        <div class="fun-fact">
+          Fun fact: Dreams in gradients and thinks in color palettes! 🎨
+        </div>
+      </div>
+    </div>
+  </div>
+
+  </div>
+
+</div>
+
+<!-- Cool Footer -->
+<div class="footer">
+  <span class="sparkle">💎</span>
+  Made For Odoo Hackathon @2025 by <span class="team-name">Team Diamond</span>
 </div>
 
 <script src="static/script.js" defer></script>
